@@ -1,22 +1,31 @@
 //Function responsible for whole date component
 
+import React, {useState,useEffect} from 'react'
 
 function DateTime(){
- let date = new Date();
- let year = date.getFullYear();
- let month = date.getMonth();
- let day = date.getDay();
- let hour = date.getHours();
- let minute = date.getMinutes();
- let second = date.getSeconds();
- let dd = date.toLocaleDateString("en", "long");
 
+const [dateTime, setDateTime] = useState(new Date());
+
+useEffect(()=>{
+    const id = setInterval(()=> setDateTime(new Date()),1000);
+    return () => clearInterval(id);
+}, []);
+
+
+const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric"
+};
+
+ let currentTime = dateTime.toLocaleTimeString();
+ let currentDate = dateTime.toLocaleDateString("en",options);
 
  return(
      <section class = "dateComponent">
-        <div class = "time">{hour} {minute} {second}</div>
-        <div class = "date">{dd}</div>
-        
+        <div class = "time">{currentTime}</div>
+        <div class = "date">{currentDate}</div>
      </section>
  )
 }

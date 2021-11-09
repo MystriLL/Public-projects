@@ -1,10 +1,11 @@
+import React from 'react';
 import './App.css';
 import DateTime from './DateTime';
 import TaskBoard from './TaskBoard';
 
 function App() {
-
-const MAX_TASKS_NUMBER = 10;
+let storedTasks = (localStorage.getItem("storedTasks")) ? JSON.parse((localStorage.getItem("storedTasks"))) : [];
+console.log(storedTasks);
 
 
   return (
@@ -13,7 +14,7 @@ const MAX_TASKS_NUMBER = 10;
         <div>hello world</div>
         </header>
         <DateTime></DateTime>
-        <TaskBoard></TaskBoard>
+        <TaskBoard storedTasks = {storedTasks}></TaskBoard>
     </div>
   );
 }

@@ -1,34 +1,35 @@
 import React from 'react'
 import Task from './Task';
 
+export default function TaskBoard(props){
+//const MAX_TASKS_NUMBER = 10;
+
+// rendering tasks from local storage content given as props
+let taskArray = props.storedTasks.map(task => {
+    return <Task name = {task.name} key = {task.name}></Task>
+});
+const[Tasks, setTasks] = React.useState(taskArray);
+const inputRef = React.createRef(); //reference that allows to get value from input
 
 
-export default function TaskBoard(){
-//console.log("TaskBoard rendered");
-let taskArray = JSON.parse((localStorage.getItem("storedArray"))) ? JSON.parse((localStorage.getItem("storedArray"))) : [];
-
-const inputRef = React.createRef(); 
-const[AllTasks, setAllTasks] = React.useState();
 
 const handleSubmit = (e) =>{
     e.preventDefault();
+
     const newTask = {
         key: inputRef.current.value,
         name: inputRef.current.value,
         priority: 0,
     }
-
-    taskArray.push(newTask);
-    localStorage.setItem("storedArray", JSON.stringify(taskArray)); 
-    e.target.reset();
-    console.log(taskArray)
-    taskArray = taskArray.map(task => {
+    props.storedTasks.push(newTask);
+    localStorage.setItem("storedTasks", JSON.stringify(props.storedTasks));
+    
+    taskArray = props.storedTasks.map(task => {
         return <Task name = {task.name} key = {task.name}></Task>
     });
-    setAllTasks(taskArray);
-    
+    setTasks(taskArray);
+    e.target.reset();
 }
-
 
 
 return(
@@ -37,9 +38,7 @@ return(
     <input class = "taskInput" placeholder = "Add task" ref = {inputRef}></input>
     </form>
     <section>
-        {AllTasks}
+        {Tasks} 
     </section>
     </>
-);
-
-}
+);}

@@ -5,7 +5,6 @@ import TaskBoard from './TaskBoard';
 
 function App() {
 let storedTasks = (localStorage.getItem("storedTasks")) ? JSON.parse((localStorage.getItem("storedTasks"))) : [];
-console.log(storedTasks);
 
 
   return (

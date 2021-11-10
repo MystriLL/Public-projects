@@ -1,7 +1,8 @@
 function Task(props){
-    console.log(`TASK o nazwie ${props.name} STWORZONY`)
     return(
-        <div>{props.name}</div>
+        <div><p>{props.name}</p>
+        <p class = "tickBox"><i class="far fa-square"></i></p>
+        </div>
     )
 }
 export default Task;
